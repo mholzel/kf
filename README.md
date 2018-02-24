@@ -19,4 +19,4 @@ If want to run the code in the simulator, then you should follow these steps:
 4. Run the EKF using `./UnscentedKF`
 5. Press `Start` in the simulator.
 
-When we run the simulator, we get RMSE errors shown here:![screenshot](C:\Dropbox\drive\kf\screenshot.png)
+When we run the simulator, we get RMSE errors shown here:![screenshot](screenshot.png)
