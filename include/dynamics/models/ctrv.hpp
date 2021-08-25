@@ -2,7 +2,7 @@
 
 #include "Eigen/Dense"
 
-#include "dynamics.hpp"
+#include "dynamics/dynamics.hpp"
 
 /**
  * Constant turn rate and velocity model.

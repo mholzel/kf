@@ -23,3 +23,6 @@ target_link_libraries(ukf PRIVATE Eigen3::Eigen)
 target_link_libraries(ukf_test PRIVATE Eigen3::Eigen)
 
 target_link_libraries(ukf PRIVATE z ssl uv uWS)
+
+target_include_directories(ukf PRIVATE include)
+target_include_directories(ukf_test PRIVATE include)

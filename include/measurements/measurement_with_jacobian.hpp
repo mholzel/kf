@@ -2,7 +2,7 @@
 
 #include "Eigen/Dense"
 
-#include "measurement.hpp"
+#include "measurements/measurement.hpp"
 
 /**
  * This class represents a measurement function of the form

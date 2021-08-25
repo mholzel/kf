@@ -2,7 +2,7 @@
 
 #include "Eigen/Dense"
 
-#include "dynamics_with_jacobian.hpp"
+#include "dynamics/dynamics_with_jacobian.hpp"
 
 /**
  * Constant velocity model.

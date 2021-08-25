@@ -1,16 +1,29 @@
 #pragma once
 
+#include <unordered_map>
+
 #include "Eigen/Dense"
 
-#include "dynamics_with_jacobian.hpp"
-#include "measurement_with_jacobian.hpp"
+#include "dynamics/dynamics_with_jacobian.hpp"
+#include "event.hpp"
+#include "measurements/measurement_with_jacobian.hpp"
 
 template <typename T = double, int x_size = Eigen::Dynamic,
           int v_size = Eigen::Dynamic, int y_size = Eigen::Dynamic>
-class EKF {
+class EKFFusion {
  private:
   DynamicsWithJacobian<T, x_size, v_size> &dynamics;
-  MeasurementWithJacobian<T, x_size, y_size> &measurement_model;
+  std::unordered_map<int, MeasurementWithJacobian<T, x_size, y_size> *>
+      &measurement_models;
+
+  /** A handy function for retrieving the filter of the specified type and
+   * throwing an error if it doesn't exist. */
+  MeasurementWithJacobian<T, x_size, y_size> *getMeasurementModel(
+      const EventType &type) {
+    auto measurement_model = measurement_models.find(type);
+    assert(measurement_model != measurement_models.end());
+    return measurement_model->second;
+  }
 
  public:
   /** the time corresponding to the state vector */
@@ -25,16 +38,18 @@ class EKF {
   /** A flag indicating whether we have received a measurement */
   bool initialized = false;
 
-  EKF(T &t, Eigen::Matrix<T, x_size, 1> &x, Eigen::Matrix<T, x_size, x_size> &P,
+  EKFFusion(
+      T &t, Eigen::Matrix<T, x_size, 1> &x, Eigen::Matrix<T, x_size, x_size> &P,
       DynamicsWithJacobian<T, x_size, v_size> &dynamics,
-      MeasurementWithJacobian<T, x_size, y_size> &measurement_model)
+      std::unordered_map<int, MeasurementWithJacobian<T, x_size, y_size> *>
+          &measurement_models)
       : t(t),
         x(x),
         P(P),
         dynamics(dynamics),
-        measurement_model(measurement_model) {}
+        measurement_models(measurement_models) {}
 
-  ~EKF(){};
+  ~EKFFusion(){};
 
   /** predict the state at the specified time */
   Eigen::Matrix<T, x_size, 1> predictState(const T &t) {
@@ -61,29 +76,33 @@ class EKF {
    * measurement y at the specified time. Note that you will almost always want
    * to call `predict` before this function so that you can be sure that the
    * internal state representation corresponds to the specified time. */
-  void update(const T &t, const Eigen::Matrix<T, y_size, 1> &y) {
-    Eigen::Matrix<T, y_size, 1> e = measurement_model.error(t, x, y);
-    Eigen::Matrix<T, y_size, x_size> C = measurement_model.dH(t, x);
+  void update(const Event<T, y_size> &event) {
+    MeasurementWithJacobian<T, x_size, y_size> *measurement_model =
+        getMeasurementModel(event.type);
+    Eigen::Matrix<T, y_size, 1> e =
+        measurement_model->error(event.time, x, event.data);
+    Eigen::Matrix<T, y_size, x_size> C = measurement_model->dH(event.time, x);
     Eigen::Matrix<T, y_size, x_size> C_P = C * P;
     Eigen::Matrix<T, x_size, y_size> Ct = C.transpose();
-    Eigen::Matrix<T, y_size, y_size> S = C_P * Ct + measurement_model.Pw(t);
+    Eigen::Matrix<T, y_size, y_size> S =
+        C_P * Ct + measurement_model->Pw(event.time);
     Eigen::Matrix<T, x_size, y_size> K = P * Ct * S.inverse();
     this->x += K * e;
     this->P -= K * C_P;
-    this->t = t;
+    this->t = event.time;
   }
 
   /** update the internal state and state covariance predictions given the
    * measurement y at the specified time */
-  void predictAndUpdate(const T &t, const Eigen::Matrix<T, y_size, 1> &y) {
+  void predictAndUpdate(Event<T, y_size> &event) {
     if (!initialized) {
       initialized = true;
-      this->t = t;
-      this->x = measurement_model.inv(t, y);
+      this->t = event.time;
+      this->x = getMeasurementModel(event.type)->inv(event.time, event.data);
       /* Note that we are assuming that you initialized P externally. */
     } else {
-      predict(t);
-      update(t, y);
+      predict(event.time);
+      update(event);
     }
   }
 };

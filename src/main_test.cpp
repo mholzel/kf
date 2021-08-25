@@ -1,12 +1,12 @@
 #include <fstream>
 #include <iostream>
 
-#include "ctrv.hpp"
-#include "cv.hpp"
-#include "ekf_fusion.hpp"
-#include "lidar.hpp"
-#include "radar.hpp"
-#include "ukf_fusion.hpp"
+#include "dynamics/models/ctrv.hpp"
+#include "dynamics/models/cv.hpp"
+#include "filters/ekf_fusion.hpp"
+#include "filters/ukf_fusion.hpp"
+#include "measurements/models/lidar.hpp"
+#include "measurements/models/radar.hpp"
 #include "utils.hpp"
 
 using namespace Eigen;
