@@ -1,31 +1,22 @@
-project(UnscentedKF)
+cmake_minimum_required(VERSION 3.11)
 
-cmake_minimum_required(VERSION 3.5)
+project(kalman_filters)
 
-add_definitions(-std=c++11)
+include(FetchContent)
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
+set(CMAKE_CXX_STANDARD 11)
 
-set(testing 0)
-if (${testing})
-    set(sources src/main_test.cpp)
-else (${testing})
-    set(sources src/main.cpp)
-endif (${testing})
+set(EIGEN_BUILD_DOC OFF)
+set(BUILD_TESTING OFF)
+FetchContent_Declare(_eigen_
+        GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+        GIT_TAG 3.4.0)
+FetchContent_MakeAvailable(_eigen_)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+add_executable(ukf src/main.cpp)
+add_executable(ukf_test src/main_test.cpp)
 
-    include_directories(/usr/local/include)
-    include_directories(/usr/local/opt/openssl/include)
-    link_directories(/usr/local/lib)
-    link_directories(/usr/local/opt/openssl/lib)
-    link_directories(/usr/local/Cellar/libuv/1*/lib)
+target_link_libraries(ukf PRIVATE Eigen3::Eigen)
+target_link_libraries(ukf_test PRIVATE Eigen3::Eigen)
 
-endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-
-add_executable(UnscentedKF ${sources})
-
-if (NOT ${testing})
-    target_link_libraries(UnscentedKF z ssl uv uWS)
-endif (NOT ${testing})
+target_link_libraries(ukf PRIVATE z ssl uv uWS)
