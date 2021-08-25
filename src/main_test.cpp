@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
       event.data << px, py;
       iss >> timestamp;
       if (since == 0) since = timestamp;
-      event.time = Utils::timestampToSeconds(timestamp, since);
+      event.time = utils::timestampToSeconds(timestamp, since);
 
       if (verbose)
         cout << "lidar event" << endl
@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
       event.data << ro, theta, ro_dot;
       iss >> timestamp;
       if (since == 0) since = timestamp;
-      event.time = Utils::timestampToSeconds(timestamp, since);
+      event.time = utils::timestampToSeconds(timestamp, since);
 
       if (verbose)
         cout << "radar event" << endl
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
     estimates.push_back(estimate);
 
     /* Just for fun, compute the root mean-squared error */
-    Matrix<T, 4, 1> rmse = Utils::rmse(estimates, fusedGroundTruth);
+    Matrix<T, 4, 1> rmse = utils::rmse(estimates, fusedGroundTruth);
     cout << "rmse" << rmse.transpose().format(format) << endl;
 
     /* If we have a nan, stop */
