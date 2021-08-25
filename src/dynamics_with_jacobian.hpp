@@ -1,7 +1,8 @@
 #pragma once
 
-#include "dynamics.h"
 #include "Eigen/Dense"
+
+#include "dynamics.hpp"
 
 /**
  * This class represents a set of autonomous dynamic equations of the form

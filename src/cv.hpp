@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Eigen/Dense"
-#include "dynamics_with_jacobian.h"
+
+#include "dynamics_with_jacobian.hpp"
 
 /**
  * Constant velocity model.

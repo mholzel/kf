@@ -1,11 +1,12 @@
 #pragma once
 
-#include "utils.h"
-#include "dynamics.h"
-#include "measurement.h"
+#include <iostream>
+
 #include "Eigen/Dense"
 
-#include <iostream>
+#include "dynamics.hpp"
+#include "measurement.hpp"
+#include "utils.hpp"
 
 using namespace std;
 

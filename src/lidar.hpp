@@ -1,7 +1,8 @@
 #pragma once
 
-#include "measurement_with_jacobian.h"
 #include "Eigen/Dense"
+
+#include "measurement_with_jacobian.hpp"
 
 template <typename T = double, int x_size = 4, int y_size = Eigen::Dynamic>
 class Lidar : public MeasurementWithJacobian<T, x_size, y_size> {

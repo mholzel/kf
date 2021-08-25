@@ -1,10 +1,12 @@
 #pragma once
 
 #include <unordered_map>
-#include "event.h"
-#include "dynamics_with_jacobian.h"
-#include "measurement_with_jacobian.h"
+
 #include "Eigen/Dense"
+
+#include "dynamics_with_jacobian.hpp"
+#include "event.hpp"
+#include "measurement_with_jacobian.hpp"
 
 template <typename T = double, int x_size = Eigen::Dynamic,
           int v_size = Eigen::Dynamic, int y_size = Eigen::Dynamic>

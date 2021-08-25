@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Eigen/Dense"
-#include "measurement.h"
+
+#include "measurement.hpp"
 
 /**
  * This class represents a measurement function of the form

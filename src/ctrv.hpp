@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Eigen/Dense"
-#include "dynamics.h"
+
+#include "dynamics.hpp"
 
 /**
  * Constant turn rate and velocity model.

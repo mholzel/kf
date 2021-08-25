@@ -1,9 +1,10 @@
 #pragma once
 
-#include "utils.h"
-#include "dynamics.h"
-#include "measurement.h"
 #include "Eigen/Dense"
+
+#include "dynamics.hpp"
+#include "measurement.hpp"
+#include "utils.hpp"
 
 template <typename T = double, int x_size = Eigen::Dynamic,
           int v_size = Eigen::Dynamic, int y_size = Eigen::Dynamic>
