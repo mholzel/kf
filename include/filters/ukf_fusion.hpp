@@ -8,8 +8,6 @@
 #include "measurements/measurement.hpp"
 #include "utils.hpp"
 
-using namespace std;
-
 template <typename T = double, int x_size = Eigen::Dynamic,
           int v_size = Eigen::Dynamic, int y_size = Eigen::Dynamic>
 class UKFFusion {
@@ -56,8 +54,6 @@ class UKFFusion {
         P(P),
         dynamics(dynamics),
         measurement_models(measurement_models) {}
-
-  ~UKFFusion(){};
 
   template <int size>
   static Eigen::Matrix<T, size, 2 * size + 1> generateSigmaPoints(
@@ -142,7 +138,9 @@ class UKFFusion {
         aug_sigma_points.block(0, 0, x_size, cols);
     const Eigen::Matrix<T, v_size, cols> noises =
         aug_sigma_points.block(x_size, 0, v_size, cols);
-    if (verbose) cout << "aug_sigma_points" << endl << aug_sigma_points << endl;
+    if (verbose) {
+      std::cout << "aug_sigma_points\n" << aug_sigma_points << std::endl;
+    }
 
     /* For each pair, use the dynamics to predict the state at time t+dt */
     Eigen::Matrix<T, x_size, cols> predicted_states =
@@ -151,7 +149,9 @@ class UKFFusion {
       predicted_states.col(i) =
           dynamics.predictState(t, dt, states.col(i), noises.col(i));
     }
-    if (verbose) cout << "predicted_states" << endl << predicted_states << endl;
+    if (verbose) {
+      std::cout << "predicted_states\n" << predicted_states << std::endl;
+    }
 
     /* Calculate the mean and covariance */
     this->x = ukfMean(predicted_states, n_aug);
@@ -199,19 +199,24 @@ class UKFFusion {
         predicted_measurements.col(i) =
             y - measurement_model->error(t, predicted_states.col(i), y);
       }
-      if (verbose)
-        cout << "predicted_measurements" << endl
-             << predicted_measurements << endl;
+      if (verbose) {
+        std::cout << "predicted_measurements\n"
+                  << predicted_measurements << std::endl;
+      }
 
       /* Now compute the mean and covariance of these predictions */
       Eigen::Matrix<T, y_size, 1> ybar = ukfMean(predicted_measurements, n_aug);
-      if (verbose) cout << "ybar" << endl << ybar << endl;
+      if (verbose) {
+        std::cout << "ybar\n" << ybar << std::endl;
+      }
 
       Eigen::Matrix<T, y_size, y_size> S(y.size(), y.size());
       S = measurement_model->Pw(t);
       S += ukfCovariance(predicted_measurements, ybar, n_aug);
 
-      if (verbose) cout << "S: " << endl << S << endl;
+      if (verbose) {
+        std::cout << "S: \n" << S << std::endl;
+      }
 
       /* Finally, compute the cross covariance,  */
       Eigen::Matrix<T, x_size, y_size> cross_covariance = ukfCrossCovariance(
