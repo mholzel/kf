@@ -6,8 +6,11 @@ include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(EIGEN_BUILD_DOC OFF)
-set(BUILD_TESTING OFF)
+set(EIGEN_BUILD_DOC OFF CACHE BOOL "Build Eigen docs")
+set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "Build Eigen package")
+set(BUILD_TESTING OFF CACHE BOOL "Build Eigen tests")
+set(EIGEN_TEST_NOQT ON CACHE BOOL "Build Eigen QT tests")
+
 FetchContent_Declare(_eigen_
         GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
         GIT_TAG 3.4.0)
