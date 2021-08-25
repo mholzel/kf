@@ -20,7 +20,7 @@ class Dynamics {
 
   Dynamics(const Eigen::Matrix<T, v_size, v_size> &Pv) : Pv(Pv) {}
 
-  virtual ~Dynamics(){};
+  virtual ~Dynamics() = default;
 
   /** predict the state x(t+dt) given the previous state x(t) and zero noise */
   virtual Eigen::Matrix<T, x_size, 1> predictState(

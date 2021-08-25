@@ -23,7 +23,7 @@ template <typename T = double, int x_size = Eigen::Dynamic,
           int y_size = Eigen::Dynamic>
 class Measurement {
  public:
-  virtual ~Measurement(){};
+  virtual ~Measurement() = default;
 
   /** measurement function */
   virtual Eigen::Matrix<T, y_size, 1> H(

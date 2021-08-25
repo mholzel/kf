@@ -18,7 +18,7 @@ class DynamicsWithJacobian : public Dynamics<T, x_size, v_size> {
   DynamicsWithJacobian(const Eigen::Matrix<T, v_size, v_size> &Pv)
       : Dynamics<T, x_size, v_size>(Pv) {}
 
-  virtual ~DynamicsWithJacobian(){};
+  virtual ~DynamicsWithJacobian() = default;
 
   /** jacobian of the state transition function with respect to x */
   virtual Eigen::Matrix<T, x_size, x_size> dF(

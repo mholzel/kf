@@ -23,7 +23,7 @@ template <typename T = double, int x_size = Eigen::Dynamic,
           int y_size = Eigen::Dynamic>
 class MeasurementWithJacobian : public Measurement<T, x_size, y_size> {
  public:
-  virtual ~MeasurementWithJacobian(){};
+  virtual ~MeasurementWithJacobian() = default;
 
   /** jacobian of the measurement function with respect to x */
   virtual Eigen::Matrix<T, y_size, x_size> dH(
