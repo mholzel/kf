@@ -1,5 +1,4 @@
-#ifndef DYNAMICS_HEADER
-#define DYNAMICS_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 
@@ -56,5 +55,3 @@ public:
         return g * Pv * g.transpose();
     }
 };
-
-#endif /* DYNAMICS_HEADER */

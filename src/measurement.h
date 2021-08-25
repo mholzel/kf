@@ -1,5 +1,4 @@
-#ifndef MEASUREMENT_HEADER
-#define MEASUREMENT_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 
@@ -49,5 +48,3 @@ public:
     Pw(const T &t) = 0;
 
 };
-
-#endif /* MEASUREMENT_HEADER */

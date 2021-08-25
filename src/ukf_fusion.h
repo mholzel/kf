@@ -1,5 +1,4 @@
-#ifndef UKF_FUSION_HEADER
-#define UKF_FUSION_HEADER
+#pragma once
 
 #include "utils.h"
 #include "dynamics.h"
@@ -225,5 +224,3 @@ public:
         }
     }
 };
-
-#endif /* UKF_HEADER */

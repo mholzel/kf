@@ -1,5 +1,4 @@
-#ifndef EVENT_HEADER
-#define EVENT_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 
@@ -15,5 +14,3 @@ public:
     EventType type;
     Eigen::Matrix<T, y_size, 1> data;
 };
-
-#endif /* EVENT_HEADER */

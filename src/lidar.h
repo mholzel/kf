@@ -1,5 +1,4 @@
-#ifndef LIDAR_HEADER
-#define LIDAR_HEADER
+#pragma once
 
 #include "measurement_with_jacobian.h"
 #include "Eigen/Dense"
@@ -47,5 +46,3 @@ public:
         return R;
     };
 };
-
-#endif /* LIDAR_HEADER */

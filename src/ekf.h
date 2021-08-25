@@ -1,5 +1,4 @@
-#ifndef EKF_HEADER
-#define EKF_HEADER
+#pragma once
 
 #include "dynamics_with_jacobian.h"
 #include "measurement_with_jacobian.h"
@@ -91,5 +90,3 @@ public:
         }
     }
 };
-
-#endif /* EKF_HEADER */

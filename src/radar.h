@@ -1,5 +1,4 @@
-#ifndef RADAR_HEADER
-#define RADAR_HEADER
+#pragma once
 
 #include "measurement_with_jacobian.h"
 #include "Eigen/Dense"
@@ -153,5 +152,3 @@ public:
         return R;
     };
 };
-
-#endif /* RADAR_HEADER */

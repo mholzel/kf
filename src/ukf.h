@@ -1,5 +1,4 @@
-#ifndef UKF_HEADER
-#define UKF_HEADER
+#pragma once
 
 #include "utils.h"
 #include "dynamics.h"
@@ -169,5 +168,3 @@ public:
         }
     }
 };
-
-#endif /* UKF_HEADER */

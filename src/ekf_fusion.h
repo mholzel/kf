@@ -1,5 +1,4 @@
-#ifndef EKF_FUSION_HEADER
-#define EKF_FUSION_HEADER
+#pragma once
 
 #include <unordered_map>
 #include "event.h"
@@ -99,5 +98,3 @@ public:
         }
     }
 };
-
-#endif /* EKF_FUSION_HEADER */

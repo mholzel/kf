@@ -1,5 +1,4 @@
-#ifndef CONSTANT_VELOCITY_HEADER
-#define CONSTANT_VELOCITY_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 #include "dynamics_with_jacobian.h"
@@ -61,5 +60,3 @@ public:
         return A;
     }
 };
-
-#endif /* CONSTANT_VELOCITY_HEADER */

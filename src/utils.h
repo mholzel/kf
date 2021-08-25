@@ -1,5 +1,4 @@
-#ifndef UTILS_HEADER
-#define UTILS_HEADER
+#pragma once
 
 #include <vector>
 #include "Eigen/Dense"
@@ -31,5 +30,3 @@ public:
         return (timestamp - since) / 1e6;
     }
 };
-
-#endif /* UTILS_HEADER */

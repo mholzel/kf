@@ -1,5 +1,4 @@
-#ifndef DYNAMICS_WITH_JACOBIAN_HEADER
-#define DYNAMICS_WITH_JACOBIAN_HEADER
+#pragma once
 
 #include "dynamics.h"
 #include "Eigen/Dense"
@@ -28,5 +27,3 @@ public:
        const T &dt,
        const Eigen::Matrix<T, x_size, 1> &x) = 0;
 };
-
-#endif /* DYNAMICS_WITH_JACOBIAN_HEADER */

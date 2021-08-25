@@ -1,5 +1,4 @@
-#ifndef CTRV_HEADER
-#define CTRV_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 #include "dynamics.h"
@@ -82,5 +81,3 @@ public:
         return g;
     }
 };
-
-#endif /* CTRV_HEADER */

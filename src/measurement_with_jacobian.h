@@ -1,5 +1,4 @@
-#ifndef MEASUREMENT_WITH_JACOBIAN_HEADER
-#define MEASUREMENT_WITH_JACOBIAN_HEADER
+#pragma once
 
 #include "Eigen/Dense"
 #include "measurement.h"
@@ -30,5 +29,3 @@ public:
     dH(const T &t,
        const Eigen::Matrix<T, x_size, 1> &x) = 0;
 };
-
-#endif /* MEASUREMENT_WITH_JACOBIAN_HEADER */
