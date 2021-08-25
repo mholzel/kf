@@ -8,7 +8,8 @@
  *
  * y(t) = H(t,x(t)) + w(t)
  *
- * This class should provide also provide an approximate inverse mapping Hinv such that
+ * This class should provide also provide an approximate inverse mapping Hinv
+ * such that
  *
  * x(t) approx Hinv(t,y(t))
  *
@@ -17,15 +18,13 @@
  *
  * Finally, this class also provides the jacobian of the measurement function H.
  */
-template<typename T = double, int x_size = Eigen::Dynamic, int y_size = Eigen::Dynamic>
+template <typename T = double, int x_size = Eigen::Dynamic,
+          int y_size = Eigen::Dynamic>
 class MeasurementWithJacobian : public Measurement<T, x_size, y_size> {
+ public:
+  virtual ~MeasurementWithJacobian(){};
 
-public:
-
-    virtual ~MeasurementWithJacobian() {};
-
-    /** jacobian of the measurement function with respect to x */
-    virtual Eigen::Matrix<T, y_size, x_size>
-    dH(const T &t,
-       const Eigen::Matrix<T, x_size, 1> &x) = 0;
+  /** jacobian of the measurement function with respect to x */
+  virtual Eigen::Matrix<T, y_size, x_size> dH(
+      const T &t, const Eigen::Matrix<T, x_size, 1> &x) = 0;
 };
