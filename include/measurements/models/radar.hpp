@@ -19,8 +19,6 @@ class Radar : public MeasurementWithJacobian<T, x_size, y_size> {
     this->e = Eigen::Matrix<T, y_size, 1>::Zero(3);
   }
 
-  ~Radar() {}
-
   Eigen::Matrix<T, y_size, 1> H(const T &t,
                                 const Eigen::Matrix<T, x_size, 1> &x) {
     Eigen::Matrix<T, y_size, 1> y = Eigen::Matrix<T, y_size, 1>::Zero(3, 1);

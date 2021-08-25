@@ -43,8 +43,6 @@ class CTRV : public Dynamics<T, 5, 2> {
     this->g = Eigen::Matrix<T, 5, 2>::Zero();
   }
 
-  ~CTRV(){};
-
   /** predict the state x(t+dt) given the previous state x(t) and zero noise */
   Eigen::Matrix<T, 5, 1> predictState(const T &t, const T &dt,
                                       const Eigen::Matrix<T, 5, 1> &x) {

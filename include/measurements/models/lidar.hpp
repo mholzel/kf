@@ -16,8 +16,6 @@ class Lidar : public MeasurementWithJacobian<T, x_size, y_size> {
         Hj(Eigen::Matrix<T, y_size, x_size>::Identity(2, x_size)),
         R(R) {}
 
-  ~Lidar() {}
-
   Eigen::Matrix<T, y_size, 1> H(const T &t,
                                 const Eigen::Matrix<T, x_size, 1> &x) {
     return Hj * x;

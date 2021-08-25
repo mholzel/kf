@@ -35,8 +35,6 @@ class UKF {
         dynamics(dynamics),
         measurement_model(measurement_model) {}
 
-  ~UKF(){};
-
   static Eigen::Matrix<T, x_size + v_size, 2 * (x_size + v_size) + 1>
   generateAugmentedSigmaPoints(Eigen::Matrix<T, x_size, 1> &x,
                                Eigen::Matrix<T, x_size, x_size> &P,

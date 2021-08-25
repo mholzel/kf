@@ -49,8 +49,6 @@ class EKFFusion {
         dynamics(dynamics),
         measurement_models(measurement_models) {}
 
-  ~EKFFusion(){};
-
   /** predict the state at the specified time */
   Eigen::Matrix<T, x_size, 1> predictState(const T &t) {
     T dt = t - this->t;

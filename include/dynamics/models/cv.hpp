@@ -22,8 +22,6 @@ class CV : public DynamicsWithJacobian<T, 4, 2> {
     this->A = Eigen::Matrix<T, 4, 4>::Identity();
   }
 
-  ~CV(){};
-
   /** predict the state x(t+dt) given the previous state x(t) and zero noise */
   Eigen::Matrix<T, 4, 1> predictState(const T &t, const T &dt,
                                       const Eigen::Matrix<T, 4, 1> &x) {

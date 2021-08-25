@@ -34,8 +34,6 @@ class EKF {
         dynamics(dynamics),
         measurement_model(measurement_model) {}
 
-  ~EKF(){};
-
   /** predict the state at the specified time */
   Eigen::Matrix<T, x_size, 1> predictState(const T &t) {
     T dt = t - this->t;
