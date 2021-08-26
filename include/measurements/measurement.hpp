@@ -7,17 +7,23 @@
  *
  * y(t) = H(t,x(t)) + w(t)
  *
- * This class should provide also provide an approximate inverse mapping such
- * that
+ * To use this function, you must override:
+ *
+ * - H(t,x(t)): The measurement function
+ * - Pw(t) : The covariance of w (often this is constant)
+ * - inv(t,y(t)): The approximate inverse mapping such that
  *
  * x(t) approx inv(t,y(t))
  *
- * and it should provide a method for computing the prediction error.
- * By default, this is simply y(t) - H(t,x(t)).
+ * which may be necessary to initialize the state given a measurement.
  *
- * Finally, this function should also provide a function which computes the
- * variance of w at time t (although this will probably just return a constant
- * matrix).
+ * In addition, you can optionally override the prediction error method.
+ * This function typically should just be of the form
+ *
+ * error(t,x,y) = y(t) - H(t,x(t)).
+ *
+ * However, when a component of the state represents a quantity like an angle,
+ * you may find it beneficial to override this error method.
  */
 template <typename T = double, int x_size = Eigen::Dynamic,
           int y_size = Eigen::Dynamic>
@@ -29,7 +35,7 @@ class Measurement {
   virtual Eigen::Matrix<T, y_size, 1> H(
       const T &t, const Eigen::Matrix<T, x_size, 1> &x) = 0;
 
-  /** the prediction error function */
+  /** prediction error function */
   virtual Eigen::Matrix<T, y_size, 1> error(
       const T &t, const Eigen::Matrix<T, x_size, 1> &x,
       const Eigen::Matrix<T, y_size, 1> &y) {
